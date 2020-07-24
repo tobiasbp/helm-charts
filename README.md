@@ -7,6 +7,17 @@ contains the packages to be shared at _https://charts.balle-petersen.org_.
 * Add the repository: `helm repo add charts.balle-petersen.org https://charts.balle-petersen.org`
 * Confirm repository is in list of repositories: `helm repo list`
 
+# Packages
+
+## db-backup
+
+## digitalocean-exporter
+An exporter of metrics from DigitalOcean to be consumed by Prometheus. Read about the configuration
+and metrics at the exporter's Git repository: https://github.com/metalmatze/digitalocean_exporter
+
+* Create read only token in Digital ocean web interface
+* Install the package: `helm install my-doe charts.balle-petersen.org/digitalocean-exporter --set exporter.DIGITALOCEAN_TOKEN="MY_TOKEN"`
+* Add the exporter to you Prometheus configuration
 
 # How to add a package to the repository
 

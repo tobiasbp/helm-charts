@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  db-backup:
+  - apiVersion: v2
+    appVersion: 0.0.3
+    created: "2020-07-24T11:23:55.325861792+02:00"
+    description: A cronjob for backing up databases
+    digest: edffb938556746022e0e1b25ba2c3a7b120c7f67f9c27249876000383474f560
+    name: db-backup
+    type: application
+    urls:
+    - https://charts.balle-petersen.org/db-backup-0.1.2.tgz
+    version: 0.1.2
+generated: "2020-07-24T11:23:55.325176306+02:00"

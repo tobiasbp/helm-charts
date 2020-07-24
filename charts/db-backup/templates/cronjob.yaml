@@ -1,0 +1,76 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "db-backup.fullname" . }}
+  labels:
+    {{- include "db-backup.labels" . | nindent 4 }}
+spec:
+  {{- range $key, $value :=  .Values.cronjob }}
+    {{- if eq $key "schedule" }}
+      {{- $key | nindent 2 }}: {{ $value | quote }}
+    {{- else }}
+      {{- $key | nindent 2 }}: {{ $value }}
+    {{- end }}
+  {{- end }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "db-backup.selectorLabels" . | nindent 12 }}
+        spec:
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          serviceAccountName: {{ include "db-backup.serviceAccountName" . }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+          - name: {{ .Chart.Name }}
+            env:
+              {{- range $key, $value :=  .Values.env }}
+              - name: {{ $key }}
+                valueFrom:
+                  secretKeyRef:
+                    name: {{ include "db-backup.fullname" $}}
+                    key: {{ $key }}  
+              {{- end }}
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 14 }}
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+            resources:
+              {{- toYaml .Values.resources | nindent 14 }}
+            volumeMounts:
+            - name: config
+              mountPath: "/etc/backups"
+              readOnly: true
+            - name: log
+              mountPath: "/var/log/backups"
+              readOnly: false
+          volumes:
+          - name: config
+            secret:
+              secretName: {{ include "db-backup.fullname" . }}
+              items:
+              - key: backups.yaml
+                path: backups.yaml
+          - name: log
+            emptyDir: {}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          restartPolicy: OnFailure

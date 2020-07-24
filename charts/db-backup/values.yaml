@@ -1,0 +1,102 @@
+# Default values for db-backup.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# These are the backups to perform
+backups: {}
+  # timeout: 600
+  # loglevel: info
+  # rootdir: my_database_backups
+  # google_chat:
+  #   url: https://chat.googleapis.com/v1/spaces/XXX/messages?key=XXX
+  #   loglevel: WARNING
+  # backups:
+  #   backup_s3:
+  #     source:
+  #       type: mysql
+  #       host: db01.example.com
+  #       user: read_only
+  #       password: SECRET
+  #       databases:
+  #       - my_database_01
+  #       - my_database_02
+  #     destination:
+  #       type: s3
+  #       access_key_id: SECRET
+  #       bucket: my_bucket
+  #       endpoint: some.endpoint.example.org
+  #       secret_access_key: SECRET
+
+
+# Environment variables to set in the container
+# If these are set, the will be used in destinations of type S3,
+# if the corresponding value is not configured. This allows for
+# shared values for all S3 destinations
+env: {}
+  # S3_BUCKET: ****
+  # S3_ENDPOINT: ****
+  # S3_ACCESS_KEY_ID: ****
+  # S3_SECRET_ACCESS_KEY: ****
+
+image:
+  repository: tobiasbp/db-backup
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# Lookup cronjob parameters here:
+# https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs
+
+cronjob: {}
+  #schedule: "0 0 * * *"
+  #failedJobsHistoryLimit: 1
+  #successfulJobsHistoryLimit: 3
+  #concurrencyPolicy: Allow
+  #startingDeadlineSeconds: 120
+  #suspend: false
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext: {}
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  # readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -47,8 +47,8 @@ image:
 # Lookup cronjob parameters here:
 # https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs
 
-cronjob: {}
-  #schedule: "0 0 * * *"
+cronjob:
+  schedule: "0 0 * * *"
   #failedJobsHistoryLimit: 1
   #successfulJobsHistoryLimit: 3
   #concurrencyPolicy: Allow

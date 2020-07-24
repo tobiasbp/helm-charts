@@ -1,0 +1,1 @@
+Read about the configuration options at https://github.com/tobiasbp/k8s-db-backup

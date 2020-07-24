@@ -3,7 +3,7 @@ entries:
   db-backup:
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2020-07-24T16:55:16.699972085+02:00"
+    created: "2020-07-24T19:42:10.588032559+02:00"
     description: A cronjob for backing up databases
     digest: d41a7cc2f14de126ce97612fb870f21cdc910c93e43ace1c3ec05b9f0f437fbb
     home: https://github.com/tobiasbp/helm-charts
@@ -18,7 +18,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2020-07-24T16:55:16.699430031+02:00"
+    created: "2020-07-24T19:42:10.587486404+02:00"
     description: A cronjob for backing up databases
     digest: b3144a4fdc14776fa68c0ca36d34bf9d07e662bb670b92ca6053f854cc52c573
     name: db-backup
@@ -28,7 +28,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.0.3
-    created: "2020-07-24T16:55:16.69897613+02:00"
+    created: "2020-07-24T19:42:10.587025244+02:00"
     description: A cronjob for backing up databases
     digest: edffb938556746022e0e1b25ba2c3a7b120c7f67f9c27249876000383474f560
     name: db-backup
@@ -39,7 +39,7 @@ entries:
   digitalocean-exporter:
   - apiVersion: v2
     appVersion: "0.5"
-    created: "2020-07-24T16:55:16.700633167+02:00"
+    created: "2020-07-24T19:42:10.588762188+02:00"
     description: A Helm chart for Kubernetes running a Promethes exporter for collecting
       metrics from DigitalOcean
     digest: 424eedd8842e3338f6abda00a2fc636df0a316c20e6667c175de7c5e8389d969
@@ -53,4 +53,20 @@ entries:
     urls:
     - https://charts.balle-petersen.org/digitalocean-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2020-07-24T16:55:16.698368206+02:00"
+  float-exporter:
+  - apiVersion: v2
+    appVersion: v0.0.4
+    created: "2020-07-24T19:42:10.589468+02:00"
+    description: A Prometheus exporter with metrics from float.com
+    digest: ac60fed37a61e128402c6e0b073c5dcb62a5be57cd768f1345b70b7bef376b07
+    home: https://github.com/tobiasbp/helm-charts
+    maintainers:
+    - email: tobiasbp@gmail.com
+      name: Tobias Balle-Petersen
+      url: https://github.com/tobiasbp
+    name: float-exporter
+    type: application
+    urls:
+    - https://charts.balle-petersen.org/float-exporter-0.1.2.tgz
+    version: 0.1.2
+generated: "2020-07-24T19:42:10.586400796+02:00"

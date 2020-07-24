@@ -1,0 +1,7 @@
+
+1. Forward the exporter's port to port 8080 on localhost with the following command: 
+kubectl --namespace {{ .Release.Namespace }} port-forward service/{{ include "float-exporter.fullname" . }} 8080:{{ .Values.service.port }}
+
+2. Make sure you get metrics when accessing http://localhost:8080/metrics
+
+3. Configure Prometheus to scrape data from: {{ include "float-exporter.fullname" . }}.{{ .Release.Namespace }} at '/metrics' on port {{ .Values.service.port }}
